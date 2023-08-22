@@ -6,22 +6,22 @@ import jakarta.persistence.Id;
 @Entity
 public class Product {
     @Id
-    private int id;
+    private Integer id;
     private String name;
-    private double price;
+    private Double price;
     public Product(){ }
 
-    public Product(int id, String name, double price) {
+    public Product(Integer id, String name, Double price) {
         this.id = id;
         this.name = name;
         this.price = price;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -33,20 +33,20 @@ public class Product {
         this.name = name;
     }
 
-    public double getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
     @Override
     public String toString() {
         return "Product{" +
-                "Id=" + id +
-                ", Name='" + name + '\'' +
-                ", Price=" + price +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
                 '}';
     }
 }

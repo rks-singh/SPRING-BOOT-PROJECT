@@ -16,7 +16,7 @@ public class Application {
 //		productService.getAllProduct();
 //		productService.pagination();
 //		productService.paginationSort();
-		productService.example();
+		productService.queryByExample();
 	}
 
 }

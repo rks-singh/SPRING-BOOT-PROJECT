@@ -27,7 +27,7 @@ public class ProductService {
         productRepository.saveAll(Arrays.asList(p1,p2,p3,p4,p5));
     }
     public void getAllProduct() {
-        List<Product> productList = productRepository.findAll(Sort.by("id","name").descending());
+        List<Product> productList = productRepository.findAll(Sort.by("id").descending());
         productList.forEach(System.out::println);
     }
 
@@ -54,5 +54,13 @@ public class ProductService {
         content.forEach(System.out::println);
     }
 
+    // QueryByExample(QBE) Example ==> It is used to implement dynamic search and filter.
+    public void queryByExample() {
+        Product entity = new Product();
+        entity.setId(101);
+        entity.setName("cpu");
+        List<Product> products = productRepository.findAll(Example.of(entity));
+        products.forEach(System.out::println);
+    }
 
 }
