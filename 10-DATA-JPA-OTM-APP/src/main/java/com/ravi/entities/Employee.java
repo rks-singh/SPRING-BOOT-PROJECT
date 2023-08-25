@@ -12,7 +12,7 @@ public class Employee {
     private Integer employeeId;
     private String employeeName;
     private Double employeeSalary;
-    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Address> addresses;
 
     public Integer getEmployeeId() {
@@ -45,5 +45,15 @@ public class Employee {
 
     public void setAddresses(List<Address> addresses) {
         this.addresses = addresses;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "employeeId=" + employeeId +
+                ", employeeName='" + employeeName + '\'' +
+                ", employeeSalary=" + employeeSalary +
+                ", addresses=" + addresses +
+                '}';
     }
 }

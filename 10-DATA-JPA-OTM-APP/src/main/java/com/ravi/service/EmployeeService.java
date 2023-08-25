@@ -45,6 +45,7 @@ public class EmployeeService {
 
     public void getRecord(int key) {
         Optional<Employee> byId = employeeRepository.findById(key);
+        byId.ifPresent(System.out::println);
     }
 
     public void getAddressRecord(int key) {
