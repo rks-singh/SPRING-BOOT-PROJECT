@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User</title>
+</head>
+<body>
+
+    <h3>User Form</h3>
+    <form th:action="@{/user}" th:object="${user}" method="POST">
+        <table>
+           <tr>
+               <td>User Id :</td>
+               <td><label>
+                   <input type="number" th:field="*{id}"/>
+               </label></td>
+           </tr>
+            
+            <tr>
+               <td>User Name :</td>
+               <td><label>
+                   <input type="text" th:field="*{name}"/>
+               </label></td>
+           </tr>
+            
+            <tr>
+               <td>User Email :</td>
+               <td><label>
+                   <input type="email" th:field="*{email}"/>
+               </label></td>
+           </tr>
+            
+            <tr>
+               <td><label>
+                   <input type="submit" value="Submit"/>
+               </label></td>
+           </tr>
+        </table>
+    </form>
+</body>
+</html>
