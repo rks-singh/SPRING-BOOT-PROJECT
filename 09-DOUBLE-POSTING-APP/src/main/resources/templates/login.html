@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+<body class="container-fluid">
+<div class=" d-flex justify-content-center align-items-center" style="height:400px">
+    <form class="w-40" th:action="@{/loginSuc}" th:object="${user}" method="post">
+
+        <h3 class="text-info" th:text="${msg}"></h3>
+        <h3 class="text-success">User Registration From</h3>
+
+                    <!--    Username field         -->
+        <div>
+            <label class="form-label text-success">Username :</label>
+            <div>
+                <label>
+                    <input type="text" class="form-control" th:field="*{name}" required>
+                </label>
+            </div>
+        </div>
+                    <!--    Email field         -->
+        <div>
+            <label class="form-label text-success">Email :</label>
+            <div>
+                <label>
+                    <input type="email" class="form-control" th:field="*{email}" required>
+                </label>
+            </div>
+        </div>
+                        <!--    PhoneNo. field         -->
+        <div>
+            <label class="form-label text-success">PhoneNo :</label>
+            <div>
+                <label>
+                    <input type="number" class="form-control" th:field="*{phone}" required>
+                </label>
+            </div>
+        </div>
+                <!--    Submit Button       -->
+        <div class="mt-2">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"></script>
+</body>
+</html>
