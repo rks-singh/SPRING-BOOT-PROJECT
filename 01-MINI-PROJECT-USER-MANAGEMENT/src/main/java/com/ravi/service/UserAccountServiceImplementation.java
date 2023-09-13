@@ -1,12 +1,15 @@
 package com.ravi.service;
 
-import com.ravi.entity.UserAccount;
-import com.ravi.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ravi.entity.UserAccount;
+import com.ravi.repository.UserRepository;
+
+@Service
 public class UserAccountServiceImplementation implements UserAccountService {
 
 	@Autowired
@@ -14,13 +17,15 @@ public class UserAccountServiceImplementation implements UserAccountService {
 
 	@Override
 	public String saveOrUpdateUserAccount(UserAccount userAccount) {
-
 		Integer status = userAccount.getId();
+		if (status == null) {
+			userAccount.setActiveSwitch("Y");
+		}
 		userRepository.save(userAccount);
 		if (status == null) {
-			return "User Account Created Successfully. !!";
+			return "saved";
 		} else {
-			return "User Account not Created. !!";
+			return "update";
 		}
 	}
 
@@ -30,17 +35,20 @@ public class UserAccountServiceImplementation implements UserAccountService {
 	}
 
 	@Override
-	public Optional<UserAccount> getUserAccount(Integer userId) {
-		return userRepository.findById(userId);
+	public UserAccount getUserAccount(Integer userId) {
+		Optional<UserAccount> findById = userRepository.findById(userId);
+		if (findById.isPresent()) {
+			return findById.get();
+		}
+		return null;
 	}
 
 	@Override
 	public boolean deleteUserAccount(Integer userId) {
-		try {
+		boolean existsById = userRepository.existsById(userId);
+		if (existsById) {
 			userRepository.deleteById(userId);
 			return true;
-		} catch (Exception exception) {
-			exception.printStackTrace();
 		}
 		return false;
 	}
@@ -54,5 +62,10 @@ public class UserAccountServiceImplementation implements UserAccountService {
 			exception.printStackTrace();
 		}
 		return false;
+	}
+
+	@Override
+	public String getUserAccountStatus(Integer id) {
+		return userRepository.getUserActiveSwitch(id);
 	}
 }

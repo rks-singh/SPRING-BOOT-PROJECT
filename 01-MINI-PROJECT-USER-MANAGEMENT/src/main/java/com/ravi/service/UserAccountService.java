@@ -1,21 +1,20 @@
 package com.ravi.service;
 
-import com.ravi.entity.UserAccount;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
-import java.util.Optional;
 
-@Service
+import com.ravi.entity.UserAccount;
+
 public interface UserAccountService {
 
 	public String saveOrUpdateUserAccount(UserAccount userAccount);
 
 	public List<UserAccount> getAllUserAccount();
 
-	public Optional<UserAccount> getUserAccount(Integer userId);
+	public UserAccount getUserAccount(Integer id);
 
 	public boolean deleteUserAccount(Integer userId);
 
-	public boolean updateUserAccountStatus(Integer userId, String status);
+	public String getUserAccountStatus(Integer id);
+
+	public boolean updateUserAccountStatus(Integer userId, String Status);
 }

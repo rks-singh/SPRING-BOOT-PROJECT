@@ -1,14 +1,20 @@
 package com.ravi.entity;
 
-import jakarta.persistence.*;
+import java.time.LocalDate;
+
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import java.time.LocalDate;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 
 // ========== Binding + Entity class ==============
 @Entity
-@Table(name = "user_account")
 public class UserAccount {
 
     @Id
@@ -17,12 +23,14 @@ public class UserAccount {
     private String name;
     private String email;
     private String gender;
-    private Long number;
-    private Long ssn;
+    private Long phone;
+	private Long ssn;
+	@DateTimeFormat(pattern ="yyyy-MM-dd")
     private LocalDate dob;
     private String activeSwitch;
+    
     @CreationTimestamp
-    @Column(updatable = false)
+    @Column(updatable=false)
     private LocalDate creationData;
     @UpdateTimestamp
     @Column(insertable = false)
@@ -51,6 +59,14 @@ public class UserAccount {
     public void setEmail(String email) {
         this.email = email;
     }
+    
+    public Long getPhone() {
+		return phone;
+	}
+
+	public void setPhone(Long phone) {
+		this.phone = phone;
+	}
 
     public String getGender() {
         return gender;
@@ -58,14 +74,6 @@ public class UserAccount {
 
     public void setGender(String gender) {
         this.gender = gender;
-    }
-
-    public Long getNumber() {
-        return number;
-    }
-
-    public void setNumber(Long number) {
-        this.number = number;
     }
 
     public Long getSsn() {
@@ -108,21 +116,12 @@ public class UserAccount {
         this.updateDate = updateDate;
     }
 
-    @Override
-    public String toString() {
-        return """
-                UserAccount{\
-                Id=\
-                """ + id +
-                ", Name='" + name + '\'' +
-                ", Email='" + email + '\'' +
-                ", Gender='" + gender + '\'' +
-                ", Number=" + number +
-                ", Ssn=" + ssn +
-                ", Dob=" + dob +
-                ", ActiveSwitch='" + activeSwitch + '\'' +
-                ", CreationData=" + creationData +
-                ", UpdateDate=" + updateDate +
-                '}';
-    }
+	@Override
+	public String toString() {
+		return "UserAccount [id=" + id + ", name=" + name + ", email=" + email + ", gender=" + gender + ", ssn=" + ssn
+				+ ", dob=" + dob + ", activeSwitch=" + activeSwitch + ", creationData=" + creationData + ", updateDate="
+				+ updateDate + "]";
+	}
+    
+    
 }
