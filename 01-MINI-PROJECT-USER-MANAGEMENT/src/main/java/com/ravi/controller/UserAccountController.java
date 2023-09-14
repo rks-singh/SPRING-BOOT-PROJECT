@@ -35,6 +35,7 @@ public class UserAccountController {
 	public String handleSubmitButton(@ModelAttribute("user") UserAccount userAccount, Model model) {
 		String status = userAccountService.saveOrUpdateUserAccount(userAccount);
 		if (status == "saved") {
+			// To handle double posting problems.
 			model.addAttribute("user", new UserAccount());
 			model.addAttribute("msg", "Form Submited Successfully. !!");
 			model.addAttribute("lable", "Register");
