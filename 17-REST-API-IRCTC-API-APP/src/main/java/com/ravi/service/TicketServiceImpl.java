@@ -23,7 +23,7 @@ public class TicketServiceImpl implements TicketService {
 		Ticket ticket = new Ticket();
 		BeanUtils.copyProperties(passenger, ticket);
 		ticket.setPrice(15000.00d);
-		ticket.setTstatus("CONFIRMED");
+		ticket.setTstatus("CONFIRM");
 
 		ticket = ticketRepository.save(ticket);
 		return ticket;

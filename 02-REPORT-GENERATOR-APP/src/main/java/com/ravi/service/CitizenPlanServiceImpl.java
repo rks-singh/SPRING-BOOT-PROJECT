@@ -1,5 +1,7 @@
 package com.ravi.service;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.List;
 
@@ -22,6 +24,7 @@ import com.lowagie.text.pdf.PdfWriter;
 import com.ravi.binding.SearchCriteria;
 import com.ravi.entity.CitizenPlan;
 import com.ravi.repository.CitizenPlanRepository;
+import com.ravi.util.EmailUtils;
 
 import io.micrometer.common.util.StringUtils;
 import jakarta.servlet.ServletOutputStream;
@@ -32,6 +35,9 @@ public class CitizenPlanServiceImpl implements CitizenPlanService {
 
 	@Autowired
 	private CitizenPlanRepository citizenPlanRepository;
+
+	@Autowired
+	private EmailUtils emailUtils;
 
 	@Override
 	public List<String> getPlanNames() {
@@ -68,7 +74,7 @@ public class CitizenPlanServiceImpl implements CitizenPlanService {
 	}
 
 	// Implementation of generating excel sheet functionality..
-	
+
 	@Override
 	public void generateExcelReport(HttpServletResponse response) throws IOException {
 
@@ -100,6 +106,13 @@ public class CitizenPlanServiceImpl implements CitizenPlanService {
 			dataRowIndex++;
 		}
 
+		// to send file as a attachment in email.
+		File file = new File("data.xls");
+		FileOutputStream out = new FileOutputStream(file);
+		workbook.write(out);
+		emailUtils.sendEmial(file);
+
+		// to download file in browser.
 		ServletOutputStream outputStream = response.getOutputStream();
 		workbook.write(outputStream);
 		workbook.close();
@@ -111,16 +124,24 @@ public class CitizenPlanServiceImpl implements CitizenPlanService {
 	@Override
 	public void generatePdf(HttpServletResponse response) throws Exception, IOException {
 
+		File file = new File("data.pdf");
+		FileOutputStream out = new FileOutputStream(file);
+
 		List<CitizenPlan> citizens = citizenPlanRepository.findAll();
 
 		// Creating object for Document.
-		Document document = new Document();
+		Document document1 = new Document();
+		Document document2 = new Document();
 
-		// Getting instance of pdfWriter.
-		PdfWriter.getInstance(document, response.getOutputStream());
+		// Getting instance of pdfWriter to send PDF to browser
+		PdfWriter.getInstance(document1, response.getOutputStream());
+
+		// Getting instance of pdfWriter to send PDF to email.
+		PdfWriter.getInstance(document2, out);
 
 		// Opening created document to change it.
-		document.open();
+		document1.open();
+		document2.open();
 
 		// Creating Font and Setting Font style and size.
 		Font fontTitle = FontFactory.getFont(FontFactory.TIMES_ROMAN);
@@ -132,7 +153,8 @@ public class CitizenPlanServiceImpl implements CitizenPlanService {
 		paragraph.setAlignment(Paragraph.ALIGN_CENTER);
 
 		// Adding the created paragraph in the document.
-		document.add(paragraph);
+		document1.add(paragraph);
+		document2.add(paragraph);
 
 		// Creating table for 7 Column.
 		PdfPTable table = new PdfPTable(7);
@@ -188,8 +210,13 @@ public class CitizenPlanServiceImpl implements CitizenPlanService {
 		}
 
 		// Adding the created table into document.
-		document.add(table);
-		document.close();
+		document1.add(table);
+		document2.add(table);
+
+		document1.close();
+		document2.close();
+		out.close();
+		emailUtils.sendEmial(file);
 	}
 
 }

@@ -7,7 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
-// ====================== Binding + Entity Class =================
+// ====================== Entity Class =================
 @Entity
 public class CitizenPlan {
 
