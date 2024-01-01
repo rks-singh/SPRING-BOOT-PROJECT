@@ -4,12 +4,14 @@ import jakarta.persistence.*;
 
 @Entity
 public class Address {
+	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer addressId;
     private String city;
     private String state;
     private String type;
+    
     @ManyToOne
     @JoinColumn(name = "employee_id" , referencedColumnName = "employeeID")
     private Employee employee;

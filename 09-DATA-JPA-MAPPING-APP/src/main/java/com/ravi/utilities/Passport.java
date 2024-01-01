@@ -6,6 +6,7 @@ import java.time.LocalDate;
 
 @Entity
 public class Passport {
+	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer passportId;
@@ -13,7 +14,7 @@ public class Passport {
     private LocalDate issueDate;
     private LocalDate expDate;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "person_id" ,referencedColumnName = "personId")
     private Person person;
 
