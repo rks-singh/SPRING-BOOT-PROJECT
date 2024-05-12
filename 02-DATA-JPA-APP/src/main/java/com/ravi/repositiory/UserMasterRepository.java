@@ -5,7 +5,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
-public interface UserMasterRepository extends CrudRepository<UserMasterEntity, Integer> {
+public interface UserMasterRepository extends CrudR  epository<UserMasterEntity, Integer> {
 
     //Query ==> select * from user_master where user_gender = "male";
     List<UserMasterEntity> findByGender(String gender);

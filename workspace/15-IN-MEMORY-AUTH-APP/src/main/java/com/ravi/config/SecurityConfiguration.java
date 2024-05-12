@@ -31,6 +31,7 @@ public class SecurityConfiguration {
 	@Bean
 	InMemoryUserDetailsManager userConfig() {
 		
+		@SuppressWarnings("deprecation")
 		UserDetails adminUser = User.withDefaultPasswordEncoder()
 			.username("ravi")
 			.password("ravi123")

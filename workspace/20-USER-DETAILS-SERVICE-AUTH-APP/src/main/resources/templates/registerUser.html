@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>User Registration</title>
+</head>
+<body>
+	<h3>User Registration</h3>
+<form th:action="@{/saveUser}" th:object="${user}" method="post">
+	<pre>
+       Name : <input type="text" name="name"  th:field="*{userName}"/>
+
+       Email: <input type="text" name="email" th:field="*{userEmail}" />
+
+       Password: <input type="password" name="password" th:field="*{userPasswd}" />
+
+        Role(s): 
+                 <input type="checkbox" name="roles" value="Admin" th:field="*{userRoles}" />Admin
+                 <input type="checkbox" name="roles" value="Manager"  th:field="*{userRoles}"/>Manager
+ 	             <input type="checkbox" name="roles" value="HR" th:field="*{userRoles}" />HR
+	             <input type="checkbox" name="roles" value="Employee" th:field="*{userRoles}" />Employee
+                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+                 <input type="submit" value="Register" />
+                 
+
+     </pre>
+</form>
+	<div th:text="${msg}"></div>
+</body>
+</html>

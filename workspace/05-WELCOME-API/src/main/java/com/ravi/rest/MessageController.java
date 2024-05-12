@@ -14,6 +14,6 @@ public class MessageController {
 	@GetMapping("/message")
 	public String getMessage() {
 		String port = env.getProperty("server.port");
-		return "WELCOME TO FIRST MICROSERVICES APP!! (SERVER PORST :: "+port+")";
+		return "WELCOME TO FIRST MICROSERVICES APP!! (SERVER PORT :: "+port+")";
 	}
 }
